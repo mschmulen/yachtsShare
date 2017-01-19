@@ -28,7 +28,23 @@ public struct User: Identifiable {
     return model
   }
 
-  //   JSON serializers
+  // JSON serializers
+//  static public func deserialize(json:JSON) -> User {
+//    let model = User(
+//      id: dictionary["id"] as! String,
+//      name: dictionary["name"] as! String,
+//      email: dictionary["email"] as! String,
+//      avatarURL: dictionary["avatarURL"] as! String
+//    )
+//    return model
+//  }
+
+  func serialize() -> JSON {
+    let model:[String: Any] = serialize()
+    let json = JSON(model)
+    return json
+  }
+
   func toJSON() -> JSON {
     return JSON([
       "name": name,
