@@ -23,7 +23,9 @@ After modifying common shared code increment the repos version tag
 1. generate: `swiftyjsonaccelerator generate -p Definitions`
 1. swift build
 
+
 Update the  config file `Definitions\.config.json` to modify the model scheme
+add `import SwiftyJSON` to new files
 
 ####SwiftyJSONAccelerator
 

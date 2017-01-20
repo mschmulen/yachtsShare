@@ -12,10 +12,12 @@ public struct Engine {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
+    static let id = "id"
     static let name = "name"
   }
 
   // MARK: Properties
+  public var id: String?
   public var name: String?
 
   // MARK: SwiftyJSON Initializers
@@ -31,6 +33,7 @@ public struct Engine {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public init(json: JSON) {
+    id = json[SerializationKeys.id].string
     name = json[SerializationKeys.name].string
   }
 
@@ -39,6 +42,7 @@ public struct Engine {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
+    if let value = id { dictionary[SerializationKeys.id] = value }
     if let value = name { dictionary[SerializationKeys.name] = value }
     return dictionary
   }

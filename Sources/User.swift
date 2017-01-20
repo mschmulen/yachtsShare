@@ -13,14 +13,16 @@ public struct User {
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let name = "name"
-    static let avatarURL = "avatarURL"
     static let email = "email"
+    static let id = "id"
+    static let avatarURL = "avatarURL"
   }
 
   // MARK: Properties
   public var name: String?
-  public var avatarURL: String?
   public var email: String?
+  public var id: String?
+  public var avatarURL: String?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -36,8 +38,9 @@ public struct User {
   /// - parameter json: JSON object from SwiftyJSON.
   public init(json: JSON) {
     name = json[SerializationKeys.name].string
-    avatarURL = json[SerializationKeys.avatarURL].string
     email = json[SerializationKeys.email].string
+    id = json[SerializationKeys.id].string
+    avatarURL = json[SerializationKeys.avatarURL].string
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -46,8 +49,9 @@ public struct User {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     if let value = name { dictionary[SerializationKeys.name] = value }
-    if let value = avatarURL { dictionary[SerializationKeys.avatarURL] = value }
     if let value = email { dictionary[SerializationKeys.email] = value }
+    if let value = id { dictionary[SerializationKeys.id] = value }
+    if let value = avatarURL { dictionary[SerializationKeys.avatarURL] = value }
     return dictionary
   }
 

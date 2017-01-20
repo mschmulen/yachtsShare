@@ -15,6 +15,7 @@ public struct Yacht {
     static let imageURL = "imageURL"
     static let architect = "architect"
     static let name = "name"
+    static let id = "id"
     static let likes = "likes"
     static let url = "url"
   }
@@ -23,6 +24,7 @@ public struct Yacht {
   public var imageURL: String?
   public var architect: String?
   public var name: String?
+  public var id: String?
   public var likes: Int?
   public var url: String?
 
@@ -42,6 +44,7 @@ public struct Yacht {
     imageURL = json[SerializationKeys.imageURL].string
     architect = json[SerializationKeys.architect].string
     name = json[SerializationKeys.name].string
+    id = json[SerializationKeys.id].string
     likes = json[SerializationKeys.likes].int
     url = json[SerializationKeys.url].string
   }
@@ -54,6 +57,7 @@ public struct Yacht {
     if let value = imageURL { dictionary[SerializationKeys.imageURL] = value }
     if let value = architect { dictionary[SerializationKeys.architect] = value }
     if let value = name { dictionary[SerializationKeys.name] = value }
+    if let value = id { dictionary[SerializationKeys.id] = value }
     if let value = likes { dictionary[SerializationKeys.likes] = value }
     if let value = url { dictionary[SerializationKeys.url] = value }
     return dictionary

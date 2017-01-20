@@ -14,6 +14,7 @@ public struct Forsale {
   private struct SerializationKeys {
     static let imageURLs = "imageURLs"
     static let name = "name"
+    static let id = "id"
     static let currency = "currency"
     static let url = "url"
     static let price = "price"
@@ -22,6 +23,7 @@ public struct Forsale {
   // MARK: Properties
   public var imageURLs: [String]?
   public var name: String?
+  public var id: String?
   public var currency: String?
   public var url: String?
   public var price: Int?
@@ -41,6 +43,7 @@ public struct Forsale {
   public init(json: JSON) {
     if let items = json[SerializationKeys.imageURLs].array { imageURLs = items.map { $0.stringValue } }
     name = json[SerializationKeys.name].string
+    id = json[SerializationKeys.id].string
     currency = json[SerializationKeys.currency].string
     url = json[SerializationKeys.url].string
     price = json[SerializationKeys.price].int
@@ -53,6 +56,7 @@ public struct Forsale {
     var dictionary: [String: Any] = [:]
     if let value = imageURLs { dictionary[SerializationKeys.imageURLs] = value }
     if let value = name { dictionary[SerializationKeys.name] = value }
+    if let value = id { dictionary[SerializationKeys.id] = value }
     if let value = currency { dictionary[SerializationKeys.currency] = value }
     if let value = url { dictionary[SerializationKeys.url] = value }
     if let value = price { dictionary[SerializationKeys.price] = value }
