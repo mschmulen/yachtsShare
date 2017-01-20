@@ -1,72 +1,62 @@
+//
+//  Yacht.swift
+//
+//  Created by Matt Schmulen on 1/20/17
+//  Copyright (c) __MyCompanyName__. All rights reserved.
+//
 
 import Foundation
 import SwiftyJSON
 
-public struct Yacht: Identifiable {
-  
-  public let id:Identifier
-  public let name:String
-  public let architect:String
-  public let url:String
-  public let imageURL:String
-  public let likes:Int
+public struct Yacht {
 
-  // Dictionary Serializers
-  static public func deserialize(dictionary:Dictionary<String, Any>) ->Yacht {
-    let model = Yacht(
-      id: dictionary["id"] as! String,
-      name: dictionary["name"] as! String,
-      architect: dictionary["architect"] as! String,
-      url: dictionary["url"] as! String,
-      imageURL: dictionary["imageURL"] as! String,
-      likes: dictionary["likes"] as! Int
-    )
-    return model
-  }
-  
-  public func serialize() -> [String: Any] {
-    var model = [String: Any]()
-    model["id"] = self.id
-    model["name"] = self.name
-    model["url"] = self.url
-    model["architect"] = self.architect
-    model["imageURL"] = self.imageURL
-    model["likes"] = self.likes
-    return model
+  // MARK: Declaration for string constants to be used to decode and also serialize.
+  private struct SerializationKeys {
+    static let imageURL = "imageURL"
+    static let architect = "architect"
+    static let name = "name"
+    static let likes = "likes"
+    static let url = "url"
   }
 
-  // JSON serializers
-  //  static public func deserialize(json:JSON) -> User {
-  //    let model = User(
-  //      id: dictionary["id"] as! String,
-  //      name: dictionary["name"] as! String,
-  //      email: dictionary["email"] as! String,
-  //      avatarURL: dictionary["avatarURL"] as! String
-  //    )
-  //    return model
-  //  }
+  // MARK: Properties
+  public var imageURL: String?
+  public var architect: String?
+  public var name: String?
+  public var likes: Int?
+  public var url: String?
 
-  func serialize() -> JSON {
-    let model:[String: Any] = serialize()
-    let json = JSON(model)
-    return json
+  // MARK: SwiftyJSON Initializers
+  /// Initiates the instance based on the object.
+  ///
+  /// - parameter object: The object of either Dictionary or Array kind that was passed.
+  /// - returns: An initialized instance of the class.
+  public init(object: Any) {
+    self.init(json: JSON(object))
   }
 
-  func toJSON() -> JSON {
-    return JSON([
-      "name": name,
-      "url": url,
-      "architect": architect,
-      "imageURL": imageURL,
-      "likes": likes
-      ])
+  /// Initiates the instance based on the JSON that was passed.
+  ///
+  /// - parameter json: JSON object from SwiftyJSON.
+  public init(json: JSON) {
+    imageURL = json[SerializationKeys.imageURL].string
+    architect = json[SerializationKeys.architect].string
+    name = json[SerializationKeys.name].string
+    likes = json[SerializationKeys.likes].int
+    url = json[SerializationKeys.url].string
+  }
+
+  /// Generates description of the object in the form of a NSDictionary.
+  ///
+  /// - returns: A Key value pair containing all valid values in the object.
+  public func dictionaryRepresentation() -> [String: Any] {
+    var dictionary: [String: Any] = [:]
+    if let value = imageURL { dictionary[SerializationKeys.imageURL] = value }
+    if let value = architect { dictionary[SerializationKeys.architect] = value }
+    if let value = name { dictionary[SerializationKeys.name] = value }
+    if let value = likes { dictionary[SerializationKeys.likes] = value }
+    if let value = url { dictionary[SerializationKeys.url] = value }
+    return dictionary
   }
 
 }
-
-extension Yacht: Equatable {
-  static public func ==(lhs: Yacht, rhs:Yacht) -> Bool {
-    return lhs.id == rhs.id
-  }
-}
-
