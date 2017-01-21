@@ -17,7 +17,9 @@ After modifying common shared code increment the repos version tag
 1. update the dependecies in [yachtServer Package.swift](https://github.com/mschmulen/yachtsServer/blob/master/Package.swift) repo [https://github.com/mschmulenyachtsServer](https://github.com/mschmulen/yachtsServer) for `.Package(url: "https://github.com/mschmulen/yachtsShare.git", Version(0, 0, 5))`
 1. update the [Cartfile dependecies in the iOS App](https://github.com/mschmulen/yachtsApp/blob/master/Yachts/Vendor/Cartfile) in the [yachtsApp](https://github.com/mschmulen/yachtsApp) for yachtShare `github "mschmulen/yachtsShare" == 0.0.5`
 
-### Build models
+### Generate models
+
+To generate the models from Definitions folder JSON stubs download and install the customized  [mschmulen/SwiftyJSONAccelerator](https://github.com/mschmulen/SwiftyJSONAccelerator) tool.
 
 1. git clone git@github.com:mschmulen/yachtsShare.git
 1. generate: `swiftyjsonaccelerator generate -p Definitions`
