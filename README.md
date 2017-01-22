@@ -27,7 +27,27 @@ To generate the models from Definitions folder JSON stubs download and install t
 
 
 Update the  config file `Definitions\.config.json` to modify the model scheme
-add `import SwiftyJSON` to new files
+
+currently you need to manually :
+
+- add `import SwiftyJSON` to new files generated
+- add conformance to Identifiable
+```
+extension ModelUser: Identifiable {
+  public var identifier: Identifier {
+    get { return self.id! }
+    set { self.id = newValue }
+  }
+}
+
+extension ModelUser: Equatable {
+  static public func ==(lhs: ModelUser, rhs:ModelUser) -> Bool {
+    return lhs.identifier == rhs.identifier
+  }
+}
+```
+
+
 
 ####SwiftyJSONAccelerator
 
